@@ -19,6 +19,10 @@ Book.prototype.info = function() {
     else {return(`${this.title} by ${this.author}, ${this.pages} pages, not read yet`)}
 };
 
+Book.prototype.toggle = function() {
+    this.read = !this.read;
+}
+
 function addBooktoLibrary(book) {
     myLibrary.push(book)
 }
@@ -34,30 +38,35 @@ function displayLibrary() {
         book = myLibrary[i]
         listElement.className = 'book'
         item = document.createElement('li');
+        item.className = 'name'
         item.innerHTML = book.title;
         listElement.appendChild(item);
 
         item = document.createElement('li');
+        item.className = 'author'
         item.innerHTML = book.author;
         listElement.appendChild(item);
             
         item = document.createElement('li');
+        item.className = 'pages'
         item.innerHTML = book.pages;
         listElement.appendChild(item);
             
         item = document.createElement('li');
+        item.className = 'read'
         item.innerHTML = book.read? 'Read': 'Not Read';
         listElement.appendChild(item);
 
         
         container.appendChild(listElement)
     }
+    readSwitcher()
 }
 
 function clearLibrary() {
     let library = Array.from(document.getElementsByClassName('library'))
     library.forEach(element => {
-        element.innerHTML = ""
+        element.remove()
     });
 }
 
@@ -78,8 +87,22 @@ submitButton.addEventListener('click', () => {
     displayLibrary()
 })
 
-displayLibrary()
+function readSwitcher() {
+    read_items = Array.from(document.getElementsByClassName('read'));
+    read_items.forEach((item) => {
+        item.addEventListener('click', () => {
+            let index = myLibrary.findIndex(book => {
+                return book.title === item.parentElement.childNodes[0].textContent
+            })
+            myLibrary[index].toggle()
+            clearLibrary()
+            displayLibrary() 
+        })
+    
+    })
+}
 
+displayLibrary()
 
 
 

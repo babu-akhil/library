@@ -1,21 +1,38 @@
 body {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
 }
 
 .library {
     display: flex;
-    
+    width: 100vw;
+    background-color: cadetblue;
+    height: 80vh;
+    padding: 50px;
+    align-items: flex-start;
 }
 .library .book {
-    border: 2px solid black;
+    border: 2px rgba(0,0,0,0.6);
     padding: 2px;
-    margin: 2px;
-    width: 30%;
+    margin: 10px;
+    width: 300px;
+    height: 250px;
     display: flex;
     flex-direction: column;
-    background-color: rgb(22, 167, 118);
+    justify-content: space-around;
+    background-color: rgb(111, 217, 181);
 }
 
+li { background: rgb(111, 217, 181); }
+li:nth-child(odd) { background: rgb(0, 201, 134); }
+
+.name {
+    font-size: 25px;
+}
+
+.read:hover {
+    background: rgb(97, 189, 158);
+}
 .library ul li{
     display: inline;
     padding: 10px;
