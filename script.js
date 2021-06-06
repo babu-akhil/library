@@ -1,6 +1,10 @@
 if(localStorage.getItem('myLibrary')) {
-    var myLibrary = JSON.parse(localStorage.getItem('myLibrary'));
-    console.log(myLibrary)
+    var myLibrary = []
+    var memory = JSON.parse(localStorage.getItem('myLibrary'));
+    console.log(memory)
+    memory.forEach(item => {
+        myLibrary.push(new Book(item['title'],item['author'], item['pages'], item['read']))
+    })
 }
 else {
 var myLibrary = [];
@@ -32,6 +36,7 @@ Book.prototype.info = function() {
 
 Book.prototype.toggle = function() {
     this.read = !this.read;
+
 }
 
 function addBooktoLibrary(book) {
@@ -118,6 +123,7 @@ function readSwitcher() {
                 return book.title === item.parentElement.childNodes[0].textContent
             })
             myLibrary[index].toggle()
+            localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
             clearLibrary()
             displayLibrary() 
         })
@@ -133,6 +139,7 @@ function bookRemover() {
             return book.title === button.parentElement.childNodes[0].textContent
         })
         myLibrary.splice(index, 1)
+        localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
         clearLibrary()
         displayLibrary()
     })
