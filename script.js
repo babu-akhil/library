@@ -1,4 +1,11 @@
-let myLibrary = [];
+if(localStorage.getItem('myLibrary')) {
+    var myLibrary = JSON.parse(localStorage.getItem('myLibrary'));
+    console.log(myLibrary)
+}
+else {
+var myLibrary = [];
+}
+
 const addBookForm = document.querySelector('.add-book')
 const newBookButton  = document.getElementById('new-book')
 
@@ -28,7 +35,8 @@ Book.prototype.toggle = function() {
 }
 
 function addBooktoLibrary(book) {
-    myLibrary.push(book)
+    myLibrary.push(book);
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
 }
 
 function displayLibrary() {
@@ -86,12 +94,6 @@ function clearLibrary() {
         element.remove()
     });
 }
-
-const Solitude = new Book('Lord of the Rings', 'R.R. Tolkien', 500, true);
-addBooktoLibrary(Solitude)
-
-const Lolita = new Book('Harry Potter', 'RK Jowling', 400, false);
-addBooktoLibrary(Lolita)
 
 const submitButton = document.getElementById('submit')
 submitButton.addEventListener('click', () => {
