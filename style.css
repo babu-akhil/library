@@ -1,15 +1,23 @@
 body {
     font-family: 'Nunito', sans-serif;
     font-size: 20px;
+    background-color: #AA6C39;
+}
+
+.title h1 {
+    text-align: center;
+    text-transform: capitalize;
+    background-color: #D49A6A;
+    color: #552700;
 }
 
 .library {
-    display: flex;
+    display: grid;
     width: 100vw;
-    background-color: cadetblue;
-    height: 80vh;
+    height: 100vh;
     padding: 50px;
-    align-items: flex-start;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 311px));
+    grid-template-rows: 260px 260px 260px;
 }
 .library .book {
     border: 2px rgba(0,0,0,0.6);
@@ -19,33 +27,89 @@ body {
     height: 250px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    background-color: rgb(111, 217, 181);
+    justify-content: space-evenly;
+    background-color: #D49A6A;
 }
 
-li { background: rgb(111, 217, 181); }
-li:nth-child(odd) { background: rgb(0, 201, 134); }
+li .textRead {
+    text-align: left;
+    margin-left: 50px;
+    padding: 5px;
+}
 
+li .textNotRead {
+    margin-left:  50px;
+    padding: 5px;
+}
+
+li { background: #D49A6A; }
+li:nth-child(odd) { background: #FFD1AA; }
+
+.close {
+    background-color: #226666 !important;
+}
+
+.textRead:hover {
+    cursor: pointer;
+}
+
+.textNotRead:hover {
+    cursor: pointer;
+}
+
+.close:hover {
+    background-color: #0D4D4D !important;
+    cursor: pointer;
+}
+
+.close {
+    align-items: center;
+    text-align: center;
+    color: white;
+    height: 10px;
+    width: 100px;
+    font-size: 12px;
+    margin-left: 90px;
+}
 .name {
     font-size: 25px;
 }
 
-.read:hover {
-    background: rgb(97, 189, 158);
-}
 .library ul li{
     display: inline;
     padding: 10px;
 }
 
 .add-book {
-    width: 500px;
+    width: 300px;
+    height: 400px;
+    position: absolute;
+    margin-left: 35vw;
+    margin-top: 10vh;
     clear: both;
     background-color: bisque;
     visibility: hidden;
+    z-index: 1;
+}
+
+.add-book label {
+    margin-left: 5px;
 }
 
 .add-book input {
     width: 80%;
     clear: both;
+    padding: 10px;
+    margin-left: 10px;
+}
+.add-book #submit {
+    bottom: 0px;
+    margin-top: 150px;
+    margin-left: 180px;
+}
+
+#new-book {
+    margin-left: 45vw;
+    margin-right: 45vw;
+    margin-bottom: 0px;
 }

@@ -1,8 +1,12 @@
 let myLibrary = [];
 const addBookForm = document.querySelector('.add-book')
 const newBookButton  = document.getElementById('new-book')
+
+
 newBookButton.addEventListener('click', () => {    
     addBookForm.style.visibility = 'visible';
+    let libraryElement = Array.from(document.getElementsByClassName('library'))[0]
+    libraryElement.style.filter =  'blur(5px)';
 })
 
 
@@ -54,13 +58,26 @@ function displayLibrary() {
             
         item = document.createElement('li');
         item.className = 'read'
-        item.innerHTML = book.read? 'Read': 'Not Read';
+        item.innerHTML = "<span class = 'textRead'>Read</span><span class = 'textNotRead'>Not Read</span>"
+        if(book.read) {
+        ReadClass = Array.from(item.getElementsByClassName('textRead'))[0];
+        ReadClass.style.boxShadow = 'inset 0px 0px 3px';
+        ReadClass.style.backgroundColor = '#97A637';
+        }
+        else {
+        ReadClass = Array.from(item.getElementsByClassName('textNotRead'))[0];
+        ReadClass.style.boxShadow = 'inset 0px 0px 3px';
+        ReadClass.style.backgroundColor = '#AA4139';
+        }
         listElement.appendChild(item);
-
-        
+        item = document.createElement('li');
+        item.className = 'close';
+        item.innerHTML = 'Remove this book';
+        listElement.appendChild(item);
         container.appendChild(listElement)
     }
     readSwitcher()
+    bookRemover()
 }
 
 function clearLibrary() {
@@ -70,10 +87,10 @@ function clearLibrary() {
     });
 }
 
-const Solitude = new Book('100 Years of Solitude', 'GGC', 500, true);
+const Solitude = new Book('Lord of the Rings', 'R.R. Tolkien', 500, true);
 addBooktoLibrary(Solitude)
 
-const Lolita = new Book('Lolita', 'Vladimir Pervertov', 400, false);
+const Lolita = new Book('Harry Potter', 'RK Jowling', 400, false);
 addBooktoLibrary(Lolita)
 
 const submitButton = document.getElementById('submit')
@@ -85,6 +102,10 @@ submitButton.addEventListener('click', () => {
     addBooktoLibrary(book)
     clearLibrary()
     displayLibrary()
+    let libraryElement = Array.from(document.getElementsByClassName('library'))[0]
+    libraryElement.filter = 'none';
+    addBookForm.style.visibility = 'hidden';
+
 })
 
 function readSwitcher() {
@@ -100,6 +121,20 @@ function readSwitcher() {
         })
     
     })
+}
+
+function bookRemover() {
+    remove_Buttons = Array.from(document.getElementsByClassName('close'));
+    remove_Buttons.forEach(button =>
+        button.addEventListener('click', () => {
+        let index = myLibrary.findIndex(book => {
+            return book.title === button.parentElement.childNodes[0].textContent
+        })
+        myLibrary.splice(index, 1)
+        clearLibrary()
+        displayLibrary()
+    })
+    )
 }
 
 displayLibrary()
