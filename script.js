@@ -12,7 +12,13 @@ var myLibrary = [];
 
 const addBookForm = document.querySelector('.add-book')
 const newBookButton  = document.getElementById('new-book')
+const closeBookForm = document.getElementById('closeform')
 
+closeBookForm.addEventListener('click', () => {
+    addBookForm.style.visibility = 'hidden'
+    let libraryElement = Array.from(document.getElementsByClassName('library'))[0]
+    libraryElement.style.filter =  'none';
+})
 
 newBookButton.addEventListener('click', () => {    
     addBookForm.style.visibility = 'visible';
