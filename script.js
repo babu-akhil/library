@@ -111,14 +111,18 @@ submitButton.addEventListener('click', () => {
     let bookname = document.getElementById('name').value
     let authorname = document.getElementById('author').value
     let pages = document.getElementById('pages').value
-    let book = new Book(bookname, authorname, pages, true)
-    addBooktoLibrary(book)
-    clearLibrary()
-    displayLibrary()
-    let libraryElement = Array.from(document.getElementsByClassName('library'))[0]
-    libraryElement.filter = 'none';
-    addBookForm.style.visibility = 'hidden';
-
+    if(bookname!= '' && authorname!='' && pages!= '') {
+        let book = new Book(bookname, authorname, pages, true)
+        addBooktoLibrary(book)
+        clearLibrary()
+        displayLibrary()
+        let libraryElement = Array.from(document.getElementsByClassName('library'))[0]
+        libraryElement.filter = 'none';
+        addBookForm.style.visibility = 'hidden';
+    }
+    else {
+        alert('Fill in all the fields')
+    }
 })
 
 function readSwitcher() {
